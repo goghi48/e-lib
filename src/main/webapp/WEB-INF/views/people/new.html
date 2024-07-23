@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New person</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<header th:insert="blocks/header :: header"></header>
+
+<main>
+    <form th:method="POST" th:action="@{/people}" th:object="${person}">
+        <label for="full_name">Enter name: </label>
+        <input type="text" th:field="*{full_name}" id="full_name"/>
+        <div style="color:red" th:if="${#fields.hasErrors('full_name')}" th:errors="*{full_name}">Name Error</div>
+        <br/>
+        <label for="birth_year">Enter birth year: </label>
+        <input type="text" th:field="*{birth_year}" id="birth_year"/>
+        <div style="color:red" th:if="${#fields.hasErrors('birth_year')}" th:errors="*{birth_year}">Email Error</div>
+        <br/>
+        <input type="submit" value="Create!"/>
+    </form>
+</main>
+</body>
+</html>

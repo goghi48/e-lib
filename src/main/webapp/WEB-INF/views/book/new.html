@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New book</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<header th:insert="blocks/header :: header"></header>
+
+<main>
+    <form th:method="POST" th:action="@{/book}" th:object="${book}">
+        <label for="title">Enter title: </label>
+        <input type="text" th:field="*{title}" id="title"/>
+        <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</div>
+        <br/>
+
+        <label for="personId">Select person: </label>
+        <select id="personId" name="personId">
+            <option value="">No person</option>
+            <option th:each="person : ${people}" th:value="${person.id}" th:text="${person.full_name}">Person</option>
+        </select>
+        <br/>
+        <label for="authorId">Select person: </label>
+        <select id="authorId" name="authorId">
+            <option value="">No author</option>
+            <option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.full_name}">Author</option>
+        </select>
+        <br/>
+        <input type="submit" value="Create!"/>
+    </form>
+</main>
+
+</body>
+</html>

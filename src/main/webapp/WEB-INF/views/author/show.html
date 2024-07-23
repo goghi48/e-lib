@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<header th:insert="blocks/header :: header"></header>
+
+<main>
+    <h1>Author Details</h1>
+    <p th:text="${author.getFull_name()}">VALUE</p>
+
+    <a th:href="@{/author/{id}/edit(id=${author.getId()})}">Edit</a>
+
+    <form th:method="DELETE" th:action="@{/author/{id}(id=${author.getId()})}">
+        <input type="submit" value="Delete"/>
+    </form>
+
+    <h2>Books</h2>
+    <ul>
+        <li th:each="book : ${books}">
+            <span th:text="${book.title}"></span>
+        </li>
+    </ul>
+</main>
+
+</body>
+</html>
